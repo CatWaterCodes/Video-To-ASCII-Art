@@ -3,17 +3,16 @@ from PIL import ImageDraw
 from PIL import ImageFont
 from math import ceil
 
-def image_to_ascii(image_path: str, pixels_per_char = 8, background = (255,255,255), foreground = (0,0,0), letter_size = 20) -> Image:
+def image_to_ascii(image: Image, pixels_per_char = 8, background = (255,255,255), foreground = (0,0,0), letter_size = 20) -> Image:
     """Turns an image into ASCII art. It takes five parameters:
             image_path: str
-            pixel_per_char=8 !!MUST BE PAIR!!
+            pixels_per_char=8 !!MUST BE PAIR!!
             background=(255,255,255)
             foreground=(0,0,0)
             letter_size=20
 
             -> output: PIL.Image"""
     assert pixels_per_char%2==0, "pixels_per_char must be pair"
-    image = Image.open(image_path)
     bw_image = black_and_white(image)
     grid = translate_image(bw_image, pixels_per_char)
     letter_grid = image_grid_to_letter_grid(grid)
